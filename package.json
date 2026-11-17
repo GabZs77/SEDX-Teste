@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "scripts": {
+    "minify:client": "node -e \"const fs=require('node:fs');const terser=require('terser');(async()=>{const files=fs.readdirSync('.').filter(f=>f.endsWith('.js')&&f!=='scriptt.js').sort();if(!files.includes('script.js'))throw Error('script.js ausente');const out=[];for(const f of files){const r=await terser.minify(fs.readFileSync(f,'utf8'),{compress:true,mangle:true,ecma:2020,format:{comments:false,semicolons:true},sourceMap:false});if(!r.code)throw Error('Terser sem saída: '+f);out.push([f,r.code])}for(const [f,code] of out)fs.writeFileSync(f,code+'\\n');console.log('JavaScript client-side minificado: '+out.length+' arquivos; source maps desativados')})().catch(e=>{console.error(e);process.exit(1)})\"",
+    "prepare:public": "node prepare-public.cjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.2"
+  },
+  "devDependencies": {
+    "terser": "^5.51.2"
+  }
+}

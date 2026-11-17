@@ -1,0 +1,9 @@
+{
+  "appId": "com.sedx.oficial",
+  "appName": "SEDX",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

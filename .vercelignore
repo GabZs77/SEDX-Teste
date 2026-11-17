@@ -1,0 +1,21 @@
+# Private repository and source-only files must not be uploaded as public static assets.
+code.zip
+*.zip
+**/*.zip
+scriptt.js
+*.md
+**/*.md
+*.mjs
+**/*.mjs
+*.sql
+**/*.sql
+*.map
+**/*.map
+test-*
+**/test-*
+/android/
+/mobile/
+/official-app/
+/docs/
+/.github/
+/scripts/

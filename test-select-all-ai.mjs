@@ -1,0 +1,13 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+const bundle = fs.readFileSync(new URL("./script.js", import.meta.url), "utf8");
+const page = bundle.slice(bundle.indexOf("function TarefasPage("), bundle.indexOf("function TaskRow("));
+assert.ok(page.includes('children:"Selecionar todas com IA"'), "o botão tem o texto pedido");
+assert.ok(!page.includes("autoAi:!0"), "não abre mais a tela de Atividades em Lote");
+assert.ok(page.includes('detail:{...f[0],autoAi:{queue:f,index:0}}'), "abre a primeira atividade pendente na tela normal");
+const modal = bundle.slice(bundle.indexOf("function TaskReaderModal("), bundle.indexOf("function QuestionAssist("));
+assert.ok(modal.includes("`Abrindo a atividade ${a.title}...`"), "status de abertura");
+assert.ok(modal.includes("`Respondendo a questão ${i+1} da atividade ${a.title}`"), "status por questão");
+assert.ok(modal.includes('"Última questão respondida. Indo para a próxima atividade."'), "status final");
+assert.ok(modal.includes("autoAi:{queue,index:nextIndex}"), "segue para a próxima atividade");
+console.log("OK: Selecionar todas com IA abre cada atividade normalmente com status.");

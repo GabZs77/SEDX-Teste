@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const source = readFileSync(new URL('./script.js', import.meta.url),'utf8');
+const redirect = source.slice(source.indexOf('function NotificationsPage()'), source.indexOf('function ProtectedRoutes()'));
+const context = {jsxRuntimeExports:{jsx:(_component,props)=>props},Redirect:'redirect'};
+vm.createContext(context); vm.runInContext(redirect,context);
+assert.equal(context.NotificationsPage().to,'/dashboard?sedxTab=chat&channel=announcements','Old notifications links must open the announcements channel in Community');
+const nav = source.match(/navItems=(\[.*?\]);function AppShell/s)?.[1];
+assert.ok(nav,'Navigation must be available to check');
+const items = vm.runInNewContext(nav,{House:0,ClipboardCheck:0,GraduationCap:0,CalendarClock:0,ListTodo:0,BookOpen:0,AboutInfoIcon:0,Sparkles:0,NotificationBellIcon:0,HandshakeNavIcon:0});
+assert.equal(items.some(item=>item.href==='/notificacoes'),false,'Notifications must not remain a separate navigation tab');
+console.log('OK: notifications are redirected to Community announcements and removed from navigation');

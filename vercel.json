@@ -1,0 +1,8 @@
+{
+  "regions": ["gru1"],
+  "buildCommand": "npm run minify:client && npm run prepare:public",
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/((?!api/|.*\\.).*)", "destination": "/index.html" }
+  ]
+}

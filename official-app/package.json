@@ -1,0 +1,16 @@
+{
+  "name": "sedx-official-android",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "sync-site": "node scripts/sync-site.mjs",
+    "cap-sync": "npm run sync-site && cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/core": "^7.4.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.3"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "SEDX",
+    "slug": "sedx-aluno",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "android": {
+      "package": "br.com.sedx.aluno",
+      "versionCode": 2,
+      "adaptiveIcon": {
+        "backgroundColor": "#0b0c0f",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "ios": {
+      "bundleIdentifier": "br.com.sedx.aluno",
+      "supportsTablet": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

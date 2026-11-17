@@ -1,0 +1,59 @@
+name: Build SEDX Native Expo APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'mobile/**'
+      - 'mobile-worker.mjs'
+      - '.github/workflows/sedx-mobile-apk.yml'
+
+jobs:
+  build-mobile-apk:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - name: Install Expo dependencies
+        working-directory: mobile
+        run: npm ci
+      - name: Sync native project and validate
+        working-directory: mobile
+        env:
+          CI: '1'
+        run: |
+          npx expo prebuild
+          npx tsc --noEmit
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0'
+      - name: Build native release APK with embedded bundle
+        working-directory: mobile/android
+        run: ./gradlew --no-daemon assembleRelease
+      - name: Verify APK
+        run: |
+          test -f mobile/android/app/build/outputs/apk/release/app-release.apk
+          unzip -l mobile/android/app/build/outputs/apk/release/app-release.apk | grep -E 'assets/index.android.bundle|assets/index.android.bundle.hbc'
+          $ANDROID_HOME/build-tools/35.0.0/apksigner verify --verbose mobile/android/app/build/outputs/apk/release/app-release.apk
+          $ANDROID_HOME/build-tools/35.0.0/aapt dump badging mobile/android/app/build/outputs/apk/release/app-release.apk | head -20
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sedx-native-expo-apk
+          path: mobile/android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
+          retention-days: 30

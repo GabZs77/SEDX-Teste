@@ -1,0 +1,24 @@
+.help-msg-identity{display:grid;gap:3px;margin-bottom:5px}
+.help-msg-identity .help-msg-author{margin:0}
+.help-msg-author{display:block;margin-bottom:4px;font-size:13px;font-weight:700;line-height:1.35;text-transform:none;letter-spacing:0}
+.help-msg-ra{display:block;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:.02em}
+.help-ticket-owner{display:flex;align-items:center;gap:8px;margin:0 0 9px}
+.help-ticket-owner-name{font-size:13px;font-weight:700;line-height:1.35;color:var(--foreground)}
+.help-ticket-owner-ra{color:var(--muted);font-size:10px;font-weight:600;letter-spacing:.02em}
+.feedback-sender{display:grid;gap:2px}
+.feedback-sender-label{color:var(--muted);font-size:11px;font-weight:600}
+.feedback-sender-name{font-size:15px;font-weight:700;line-height:1.35;color:var(--foreground)}
+.feedback-sender-ra{color:var(--muted);font-size:10px;font-weight:600;letter-spacing:.02em}
+.help-msg-text{line-height:1.55;overflow-wrap:anywhere}
+.help-msg-text p{margin:0 0 9px}
+.help-msg-text p:last-child{margin-bottom:0}
+.help-msg-text strong{font-weight:800;color:var(--foreground)}
+.help-msg-text h1,.help-msg-text h2,.help-msg-text h3,.help-msg-text h4{margin:12px 0 7px;color:var(--foreground);font-weight:800;line-height:1.2}
+.help-msg-text h1{font-size:1.35em}.help-msg-text h2{font-size:1.2em}.help-msg-text h3{font-size:1.08em}.help-msg-text h4{font-size:1em}
+.help-msg-text h1:first-child,.help-msg-text h2:first-child,.help-msg-text h3:first-child,.help-msg-text h4:first-child{margin-top:0}
+.help-msg-text ul,.help-msg-text ol{margin:6px 0 10px;padding-left:24px}
+.help-msg-text li{margin:5px 0;padding-left:3px}
+.help-msg-text br{display:block;content:"";margin:5px 0}
+
+.help-msg-link{color:#4da3ff;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:650;overflow-wrap:anywhere}.help-msg-link:hover,.help-msg-link:focus{color:#82c2ff}
+.help-msg-identity{display:flex;align-items:center;gap:8px}.help-msg-avatar{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;overflow:hidden;border:1px solid color-mix(in srgb,var(--primary,#c6c8ce) 38%,transparent);border-radius:50%;background:linear-gradient(135deg,var(--primary-strong,#f1f1f3),var(--primary,#c6c8ce));color:var(--primary-foreground,#111216);font-size:10px;font-weight:850}.help-msg-avatar img{width:100%;height:100%;display:block;object-fit:cover;border-radius:inherit}

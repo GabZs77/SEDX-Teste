@@ -1,0 +1,14 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+const source = await readFile(new URL("./script.js", import.meta.url), "utf8");
+const start = source.indexOf("function validateRedacaoSubmission(");
+const end = source.indexOf("function TaskReaderModal(", start);
+assert.ok(start >= 0 && end > start, "validador de redação não encontrado");
+const validate = new Function(`${source.slice(start, end)};return validateRedacaoSubmission;`)();
+assert.match(validate("", "texto"), /título/i);
+assert.match(validate("Meu título", ""), /Escreva/i);
+assert.match(validate("Meu título", "a".repeat(1699)), /1\.700/);
+assert.equal(validate("Meu título", "a".repeat(1700)), "");
+assert.ok(source.includes("validateRedacaoSubmission(P.__redacao_title,P[redacaoQuestion?.id])"));
+assert.ok(source.includes('toast.error("Redação incompleta"'));
+console.log("OK: redações sem título, sem texto ou abaixo do mínimo não são enviadas.");

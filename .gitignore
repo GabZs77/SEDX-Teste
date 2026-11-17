@@ -1,0 +1,16 @@
+android/.gradle/
+android/build/
+android/app/build/
+node_modules/
+official-app/node_modules/
+official-app/www/
+official-app/android/.gradle/
+official-app/android/build/
+official-app/android/app/build/
+official-app/android/app/src/main/assets/public/
+apk-artifact/
+apk-download/
+*.iml
+.idea/
+.DS_Store
+/public/
